@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Explora las Tecnologías de la Información y la Comunicación (TIC) de forma interactiva.">
+<title>TIC · El sistema nervioso del mundo</title>
+<style>
+  :root{
+    --bg:#070b1a; --bg2:#0d1430; --card:#121a3a; --txt:#e8ecff; --muted:#9aa7d6;
+    --c1:#00e5ff; --c2:#b266ff; --c3:#ff5ca8; --ok:#3dffa2; --bad:#ff5c6c;
+    --radius:18px;
+  }
+  body.dia{
+    --bg:#f3f6ff; --bg2:#e4eaff; --card:#ffffff; --txt:#16204a; --muted:#52608f;
+    --c1:#0077ff; --c2:#7a2cff; --c3:#e0267f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Segoe UI",system-ui,Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;transition:background .5s,color .5s}
+  a{color:var(--c1)}
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;gap:6px;align-items:center;justify-content:space-between;
+      padding:10px 4%;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid #ffffff18}
+  nav .logo{font-weight:800;letter-spacing:2px;background:linear-gradient(90deg,var(--c1),var(--c3));-webkit-background-clip:text;background-clip:text;color:transparent}
+  nav ul{list-style:none;display:flex;gap:16px;flex-wrap:wrap}
+  nav ul a{text-decoration:none;color:var(--muted);font-size:.9rem}
+  nav ul a:hover{color:var(--c1)}
+  button{font:inherit;cursor:pointer;border:0;border-radius:999px;padding:10px 20px;color:#fff;
+         background:linear-gradient(90deg,var(--c1),var(--c2));font-weight:600;transition:transform .15s,box-shadow .2s}
+  button:hover{transform:translateY(-2px);box-shadow:0 8px 24px #00e5ff44}
+  button:active{transform:scale(.96)}
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:grid;place-items:center;text-align:center;overflow:hidden;
+        background:radial-gradient(circle at 50% 30%,var(--bg2),var(--bg) 70%)}
+  #net{position:absolute;inset:0;width:100%;height:100%}
+  .hero-content{position:relative;z-index:2;padding:0 6%;pointer-events:none}
+  .hero-content button,.hero-content a{pointer-events:auto}
+  .tag{display:inline-block;padding:4px 14px;border:1px solid var(--c1);border-radius:999px;color:var(--c1);font-size:.8rem;letter-spacing:2px;margin-bottom:18px}
+  h1{font-size:clamp(2.4rem,7vw,5.2rem);line-height:1.05;margin-bottom:14px}
+  h1 span{background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{max-width:620px;margin:0 auto 24px;color:var(--muted);font-size:1.1rem}
+  .hint{font-size:.8rem;margin-top:14px;color:var(--muted);opacity:.8}
+
+  section{padding:90px 6%;max-width:1150px;margin:auto}
+  h2{font-size:clamp(1.7rem,4vw,2.6rem);margin-bottom:8px}
+  h2::after{content:"";display:block;width:70px;height:4px;border-radius:4px;margin-top:8px;background:linear-gradient(90deg,var(--c1),var(--c3))}
+  .sub{color:var(--muted);margin:10px 0 34px;max-width:680px}
+
+  /* FLIP CARDS */
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}
+  .flip{perspective:900px;height:310px;cursor:pointer}
+  .flip-in{position:relative;width:100%;height:100%;transition:transform .7s;transform-style:preserve-3d}
+  .flip.on .flip-in{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+        background:var(--card);border:1px solid #ffffff1a;box-shadow:0 10px 30px #0004}
+  .face.back{transform:rotateY(180deg);background:linear-gradient(145deg,var(--c2),var(--c1));color:#fff}
+  .face svg{width:120px;height:120px;margin-bottom:10px}
+  .face h3{font-size:1.4rem}
+  .face small{color:var(--muted)}
+  .face.back small{color:#ffffffcc}
+
+  /* TIMELINE */
+  .tl{display:flex;gap:10px;overflow-x:auto;padding:10px 4px 20px;scroll-snap-type:x mandatory}
+  .tl button{flex:0 0 auto;scroll-snap-align:center;background:var(--card);color:var(--txt);border:2px solid #ffffff22;border-radius:14px;padding:12px 18px}
+  .tl button.on{border-color:var(--c1);background:linear-gradient(145deg,var(--c2),var(--c1));color:#fff}
+  .tl b{display:block;font-size:1.3rem}
+  #tl-detail{display:grid;grid-template-columns:160px 1fr;gap:22px;align-items:center;background:var(--card);padding:24px;border-radius:var(--radius);border:1px solid #ffffff18;min-height:190px;animation:pop .4s}
+  #tl-detail .ico{font-size:6rem;text-align:center}
+  #tl-detail h3{color:var(--c1);margin-bottom:6px}
+  @keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @media(max-width:600px){#tl-detail{grid-template-columns:1fr;text-align:center}}
+
+  /* PACKET SIM */
+  .sim{background:var(--card);border-radius:var(--radius);padding:20px;border:1px solid #ffffff18}
+  .sim svg{width:100%;height:auto}
+  .node circle.base{fill:var(--bg2);stroke:var(--c1);stroke-width:2;transition:fill .3s,stroke .3s}
+  .node.lit circle.base{fill:var(--c1);stroke:#fff}
+  .node text{fill:var(--txt);font-size:13px;text-anchor:middle}
+  .node text.em{font-size:26px}
+  #pkt{transition:transform .9s cubic-bezier(.5,0,.3,1);filter:drop-shadow(0 0 8px var(--c3))}
+  #log{margin-top:14px;font-family:Consolas,monospace;font-size:.9rem;background:#000a;color:var(--ok);padding:14px;border-radius:12px;min-height:110px}
+  #log div{animation:pop .3s}
+  .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;align-items:center}
+
+  /* VIDEO */
+  .video-box{position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:linear-gradient(135deg,#1a1f4d,#4b1a6b);border:1px solid #ffffff22;cursor:pointer;display:grid;place-items:center}
+  .video-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .play{width:90px;height:90px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 0 0 0 #fff8;animation:pulse 1.8s infinite}
+  .play::after{content:"";margin-left:8px;border-left:26px solid #5b21b6;border-top:16px solid transparent;border-bottom:16px solid transparent}
+  .video-box .cap{position:absolute;bottom:14px;left:18px;color:#fff;font-weight:600;text-shadow:0 2px 6px #000}
+  @keyframes pulse{70%{box-shadow:0 0 0 28px #fff0}100%{box-shadow:0 0 0 0 #fff0}}
+  .vid2{margin-top:26px;border-radius:var(--radius);overflow:hidden}
+  .vid2 video{width:100%;display:block;border-radius:var(--radius)}
+
+  /* TABS */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .tabs button{background:var(--card);color:var(--txt);border:2px solid #ffffff22}
+  .tabs button.on{background:linear-gradient(90deg,var(--c1),var(--c3));color:#fff;border-color:transparent}
+  #tab-body{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;background:var(--card);border-radius:var(--radius);padding:26px;border:1px solid #ffffff18;animation:pop .4s}
+  #tab-body svg{width:100%;max-height:260px}
+  #tab-body ul{margin:10px 0 0 20px;color:var(--muted)}
+  @media(max-width:700px){#tab-body{grid-template-columns:1fr}}
+
+  /* QUIZ */
+  .quiz{background:var(--card);border-radius:var(--radius);padding:26px;border:1px solid #ffffff18}
+  .opts{display:grid;gap:10px;margin:16px 0}
+  .opts button{background:transparent;border:2px solid #ffffff2a;color:var(--txt);border-radius:12px;text-align:left}
+  .opts button.ok{background:var(--ok);color:#052;border-color:var(--ok)}
+  .opts button.bad{background:var(--bad);border-color:var(--bad)}
+  .bar{height:10px;border-radius:10px;background:#ffffff1f;overflow:hidden;margin-bottom:14px}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--c1),var(--ok));transition:width .5s}
+
+  /* CHECKLIST */
+  .chk{display:grid;gap:10px}
+  .chk label{display:flex;gap:12px;align-items:center;background:var(--card);padding:14px 18px;border-radius:14px;border:2px solid #ffffff18;cursor:pointer;transition:.25s}
+  .chk input{width:20px;height:20px;accent-color:var(--c1)}
+  .chk label.on{border-color:var(--ok);transform:translateX(6px)}
+  #badge{margin-top:16px;font-size:1.2rem;text-align:center;min-height:34px}
+
+  footer{text-align:center;padding:40px 6% 60px;color:var(--muted);border-top:1px solid #ffffff12}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120px);background:var(--c2);color:#fff;padding:10px 22px;border-radius:999px;z-index:99;transition:transform .4s}
+  .toast.show{transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">⟡ T·I·C</span>
+  <ul>
+    <li><a href="#que">¿Qué son?</a></li>
+    <li><a href="#historia">Historia</a></li>
+    <li><a href="#red">Viaja por la red</a></li>
+    <li><a href="#video">Videos</a></li>
+    <li><a href="#vida">En tu vida</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+  </ul>
+  <button id="tema" aria-label="Cambiar tema">☀️ / 🌙</button>
+</nav>
+
+<header class="hero">
+  <canvas id="net"></canvas>
+  <div class="hero-content">
+    <span class="tag">TECNOLOGÍAS DE LA INFORMACIÓN Y LA COMUNICACIÓN</span>
+    <h1>El <span>sistema nervioso</span><br>del mundo digital</h1>
+    <p>Cada mensaje, cada video y cada clase en línea viaja por una red invisible. Descúbrela haciendo clic.</p>
+    <a href="#que"><button>Comenzar el viaje ↓</button></a>
+    <p class="hint">💡 Haz clic en cualquier parte del fondo para crear nodos de red.</p>
+  </div>
+</header>
+
+<section id="que">
+  <h2>¿Qué son las TIC?</h2>
+  <p class="sub">Son el conjunto de tecnologías que nos permiten <b>obtener, procesar, almacenar y compartir</b> información. Toca cada tarjeta para girarla.</p>
+  <div class="grid3">
+    <div class="flip"><div class="flip-in">
+      <div class="face"><svg viewBox="0 0 120 120"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#00e5ff"/><stop offset="1" stop-color="#b266ff"/></linearGradient></defs><ellipse cx="60" cy="30" rx="40" ry="14" fill="url(#g1)"/><path d="M20 30v30c0 8 18 14 40 14s40-6 40-14V30" fill="none" stroke="url(#g1)" stroke-width="4"/><path d="M20 60v30c0 8 18 14 40 14s40-6 40-14V60" fill="none" stroke="url(#g1)" stroke-width="4"/></svg><h3>Información</h3><small>Toca para girar</small></div>
+      <div class="face back"><h3>Datos con sentido</h3><small>Bases de datos, nubes y buscadores guardan y organizan el conocimiento humano para encontrarlo en segundos.</small></div>
+    </div></div>
+    <div class="flip"><div class="flip-in">
+      <div class="face"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="44" fill="none" stroke="#ff5ca8" stroke-width="4"/><ellipse cx="60" cy="60" rx="20" ry="44" fill="none" stroke="#ff5ca8" stroke-width="3"/><path d="M16 60h88M24 36h72M24 84h72" stroke="#ff5ca8" stroke-width="3"/></svg><h3>Comunicación</h3><small>Toca para girar</small></div>
+      <div class="face back"><h3>Conectados</h3><small>Correo, videollamadas, redes sociales y mensajería rompen la distancia: hablar con alguien al otro lado del planeta toma milisegundos.</small></div>
+    </div></div>
+    <div class="flip"><div class="flip-in">
+      <div class="face"><svg viewBox="0 0 120 120"><rect x="34" y="12" width="52" height="96" rx="10" fill="none" stroke="#00e5ff" stroke-width="4"/><circle cx="60" cy="96" r="4" fill="#00e5ff"/><path d="M46 36h28M46 50h28M46 64h18" stroke="#00e5ff" stroke-width="4" stroke-linecap="round"/></svg><h3>Tecnología</h3><small>Toca para girar</small></div>
+      <div class="face back"><h3>Las herramientas</h3><small>Computadoras, celulares, fibra óptica, satélites, antenas 5G, sensores IoT y software: el hardware y programas que lo hacen posible.</small></div>
+    </div></div>
+  </div>
+</section>
+
+<section id="historia">
+  <h2>Máquina del tiempo</h2>
+  <p class="sub">Elige una fecha y descubre cómo llegamos hasta aquí.</p>
+  <div class="tl" id="tl"></div>
+  <div id="tl-detail"></div>
+</section>
+
+<section id="red">
+  <h2>Viaja con un paquete de datos</h2>
+  <p class="sub">Cuando abres una página web, tu petición viaja en "paquetes". Pulsa el botón y síguelo.</p>
+  <div class="sim">
+    <svg viewBox="0 0 900 230" id="simsvg">
+      <path d="M90 115 L270 115 L450 115 L630 115 L810 115" stroke="#ffffff33" stroke-width="3" stroke-dasharray="6 8" fill="none"/>
+      <g class="node" id="n0"><circle class="base" cx="90" cy="115" r="38"/><text class="em" x="90" y="124">💻</text><text x="90" y="178">Tu equipo</text></g>
+      <g class="node" id="n1"><circle class="base" cx="270" cy="115" r="38"/><text class="em" x="270" y="124">📡</text><text x="270" y="178">Router Wi-Fi</text></g>
+      <g class="node" id="n2"><circle class="base" cx="450" cy="115" r="38"/><text class="em" x="450" y="124">🏢</text><text x="450" y="178">Proveedor (ISP)</text></g>
+      <g class="node" id="n3"><circle class="base" cx="630" cy="115" r="38"/><text class="em" x="630" y="124">📖</text><text x="630" y="178">Servidor DNS</text></g>
+      <g class="node" id="n4"><circle class="base" cx="810" cy="115" r="38"/><text class="em" x="810" y="124">🗄️</text><text x="810" y="178">Servidor web</text></g>
+      <g id="pkt" style="transform:translate(90px,115px)"><rect x="-14" y="-14" width="28" height="28" rx="6" fill="#ff5ca8"/><text x="0" y="6" text-anchor="middle" font-size="16">✉️</text></g>
+    </svg>
+    <div class="row">
+      <button id="send">🚀 Enviar paquete</button>
+      <span style="color:var(--muted)">Petición: <b>www.ejemplo.com</b></span>
+    </div>
+    <div id="log"><div>&gt; Esperando… pulsa «Enviar paquete».</div></div>
+  </div>
+</section>
+
+<section id="video">
+  <h2>Mira y aprende</h2>
+  <p class="sub">Haz clic en la pantalla para cargar el video sobre cómo funciona Internet.</p>
+  <div class="video-box" id="vbox">
+    <div class="play"></div>
+    <span class="cap">▶ ¿Cómo funciona Internet? (clic para reproducir)</span>
+  </div>
+  <p class="hint">Si el video no carga, busca «How the Internet Works» de Code.org en YouTube. Puedes cambiar el ID en el código (<code>VIDEO_ID</code>).</p>
+  <div class="vid2">
+    <p class="sub" style="margin-top:22px">Y un segundo video, reproducido directamente con la etiqueta <code>&lt;video&gt;</code> de HTML5:</p>
+    <video controls preload="metadata" poster="" src="https://www.w3schools.com/html/mov_bbb.mp4">Tu navegador no soporta video HTML5.</video>
+  </div>
+</section>
+
+<section id="vida">
+  <h2>Las TIC en tu vida</h2>
+  <p class="sub">Selecciona un ámbito.</p>
+  <div class="tabs" id="tabs"></div>
+  <div id="tab-body"></div>
+</section>
+
+<section id="quiz">
+  <h2>¿Cuánto aprendiste?</h2>
+  <p class="sub">Cuatro preguntas rápidas.</p>
+  <div class="quiz">
+    <div class="bar"><i id="qbar"></i></div>
+    <h3 id="qtxt"></h3>
+    <div class="opts" id="qopts"></div>
+    <div class="row"><button id="qnext" style="display:none">Siguiente →</button><span id="qscore" style="color:var(--muted)"></span></div>
+  </div>
+</section>
+
+<section id="civica">
+  <h2>Ciudadano digital</h2>
+  <p class="sub">Marca los hábitos que ya practicas y llena tu medidor de seguridad.</p>
+  <div class="bar"><i id="cbar"></i></div>
+  <div class="chk" id="chk"></div>
+  <div id="badge"></div>
+</section>
+
+<footer>
+  <p>Hecho con HTML, CSS y JavaScript · Tema: Tecnologías de la Información y la Comunicación</p>
+  <p style="margin-top:8px">Clics en esta página: <b id="clicks">0</b> 🖱️</p>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== Utilidades ===== */
+const $ = s => document.querySelector(s);
+const toast = (t) => { const e=$("#toast"); e.textContent=t; e.classList.add("show"); clearTimeout(e._t); e._t=setTimeout(()=>e.classList.remove("show"),1800); };
+let clicks=0; document.addEventListener("click",()=>{ $("#clicks").textContent=++clicks; });
+
+/* ===== Tema día/noche ===== */
+$("#tema").onclick=()=>{ document.body.classList.toggle("dia"); toast(document.body.classList.contains("dia")?"☀️ Modo día":"🌙 Modo noche"); };
+
+/* ===== Red animada en el hero ===== */
+const cv=$("#net"), cx=cv.getContext("2d"); let W,H,pts=[];
+function size(){ W=cv.width=cv.offsetWidth; H=cv.height=cv.offsetHeight; }
+addEventListener("resize",size); size();
+function add(x,y,burst){ pts.push({x,y,vx:(Math.random()-.5)*(burst?3:.8),vy:(Math.random()-.5)*(burst?3:.8),r:2+Math.random()*2}); if(pts.length>130) pts.shift(); }
+for(let i=0;i<60;i++) add(Math.random()*W,Math.random()*H);
+cv.parentElement.addEventListener("click",e=>{
+  if(e.target.closest("button,a")) return;
+  const r=cv.getBoundingClientRect(); for(let i=0;i<6;i++) add(e.clientX-r.left,e.clientY-r.top,true);
+});
+(function loop(){
+  cx.clearRect(0,0,W,H);
+  const dia=document.body.classList.contains("dia"), col=dia?"0,90,255":"0,229,255";
+  pts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1; p.vx*=.999; p.vy*=.999;
+    cx.beginPath(); cx.arc(p.x,p.y,p.r,0,7); cx.fillStyle=`rgba(${col},.9)`; cx.fill(); });
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+    const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);
+    if(d<130){ cx.strokeStyle=`rgba(${col},${.5-d/260})`; cx.beginPath(); cx.moveTo(pts[i].x,pts[i].y); cx.lineTo(pts[j].x,pts[j].y); cx.stroke(); }
+  }
+  requestAnimationFrame(loop);
+})();
+
+/* ===== Tarjetas giratorias ===== */
+document.querySelectorAll(".flip").forEach(f=>f.onclick=()=>f.classList.toggle("on"));
+
+/* ===== Línea de tiempo ===== */
+const eras=[
+ {y:"1844",ico:"📟",t:"El telégrafo",d:"Samuel Morse envía el primer mensaje telegráfico de larga distancia. Por primera vez la información viaja más rápido que un mensajero."},
+ {y:"1876",ico:"☎️",t:"El teléfono",d:"Alexander Graham Bell patenta el teléfono: la voz humana viaja por cables eléctricos."},
+ {y:"1969",ico:"🛰️",t:"ARPANET",d:"Se conectan los primeros computadores en universidades de EE. UU. Es el embrión de Internet."},
+ {y:"1991",ico:"🌐",t:"La World Wide Web",d:"Tim Berners-Lee publica la primera web basada en HTML, enlaces y navegadores. Nace la web que usamos hoy."},
+ {y:"2007",ico:"📱",t:"Llega el smartphone",d:"El teléfono inteligente pone Internet, cámara y aplicaciones en el bolsillo de miles de millones de personas."},
+ {y:"Hoy",ico:"🤖",t:"IA, nube e IoT",d:"Inteligencia artificial, computación en la nube, 5G y objetos conectados transforman la educación, la salud y la industria."}
+];
+const tl=$("#tl");
+eras.forEach((e,i)=>{ const b=document.createElement("button"); b.innerHTML=`<b>${e.y}</b>${e.t}`; b.onclick=()=>show(i); tl.appendChild(b); });
+function show(i){
+  [...tl.children].forEach((b,k)=>b.classList.toggle("on",k===i));
+  const e=eras[i]; const box=$("#tl-detail"); box.style.animation="none"; box.offsetHeight; box.style.animation="";
+  box.innerHTML=`<div class="ico">${e.ico}</div><div><h3>${e.y} · ${e.t}</h3><p>${e.d}</p></div>`;
+}
+show(0);
+
+/* ===== Simulador de paquete ===== */
+const pos=[90,270,450,630,810], msgs=[
+ "Tu equipo crea el paquete con la petición HTTP.",
+ "El router Wi-Fi recibe las ondas de radio y reenvía el paquete.",
+ "El ISP lo manda por fibra óptica hacia Internet.",
+ "El DNS traduce www.ejemplo.com → 93.184.216.34 (la «dirección IP»).",
+ "¡Llegó al servidor web! Responde con el HTML de la página."
+];
+let busy=false;
+$("#send").onclick=async()=>{
+  if(busy) return; busy=true;
+  const log=$("#log"); log.innerHTML=""; document.querySelectorAll(".node").forEach(n=>n.classList.remove("lit"));
+  const pkt=$("#pkt"); pkt.style.transition="none"; pkt.style.transform=`translate(90px,115px)`; pkt.getBoundingClientRect(); pkt.style.transition="";
+  for(let i=0;i<5;i++){
+    pkt.style.transform=`translate(${pos[i]}px,115px)`;
+    await new Promise(r=>setTimeout(r,950));
+    $("#n"+i).classList.add("lit");
+    log.insertAdjacentHTML("beforeend",`<div>&gt; [${i+1}/5] ${msgs[i]}</div>`);
+  }
+  for(let i=3;i>=0;i--){ pkt.style.transform=`translate(${pos[i]}px,115px)`; await new Promise(r=>setTimeout(r,450)); }
+  log.insertAdjacentHTML("beforeend",`<div>&gt; ✅ La página vuelve a tu pantalla. ¡Todo en menos de un segundo!</div>`);
+  busy=false;
+};
+
+/* ===== Video click-to-load ===== */
+const VIDEO_ID="7_LPdttKXPc"; // cambia este ID por el de tu video favorito de YouTube
+$("#vbox").onclick=function(){
+  this.innerHTML=`<iframe src="https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="Video sobre Internet"></iframe>`;
+  this.onclick=null; this.style.cursor="default";
+};
+
+/* ===== Pestañas con ilustraciones SVG ===== */
+const art={
+ edu:`<svg viewBox="0 0 300 220"><rect x="30" y="30" width="240" height="140" rx="12" fill="#1c2a6b" stroke="#00e5ff" stroke-width="3"/><rect x="45" y="45" width="210" height="110" rx="6" fill="#0a1236"/><path d="M70 130l30-40 30 25 35-50 40 55" fill="none" stroke="#3dffa2" stroke-width="4"/><path d="M110 170h80l10 24H100z" fill="#00e5ff"/><circle cx="240" cy="62" r="10" fill="#ff5ca8"/></svg>`,
+ sal:`<svg viewBox="0 0 300 220"><rect x="60" y="30" width="180" height="150" rx="16" fill="#1c2a6b" stroke="#ff5ca8" stroke-width="3"/><path d="M120 105h20l10-30 20 60 10-30h20" fill="none" stroke="#3dffa2" stroke-width="5" stroke-linecap="round" transform="translate(-20 0)"/><rect x="138" y="52" width="24" height="8" rx="3" fill="#ff5ca8"/><rect x="146" y="44" width="8" height="24" rx="3" fill="#ff5ca8"/><circle cx="150" cy="150" r="8" fill="#00e5ff"/></svg>`,
+ trab:`<svg viewBox="0 0 300 220"><rect x="40" y="40" width="220" height="130" rx="10" fill="#1c2a6b" stroke="#b266ff" stroke-width="3"/><circle cx="90" cy="95" r="18" fill="#00e5ff"/><circle cx="150" cy="95" r="18" fill="#ff5ca8"/><circle cx="210" cy="95" r="18" fill="#3dffa2"/><rect x="72" y="125" width="36" height="10" rx="5" fill="#ffffff55"/><rect x="132" y="125" width="36" height="10" rx="5" fill="#ffffff55"/><rect x="192" y="125" width="36" height="10" rx="5" fill="#ffffff55"/><path d="M110 190h80" stroke="#b266ff" stroke-width="6" stroke-linecap="round"/></svg>`,
+ ocio:`<svg viewBox="0 0 300 220"><rect x="50" y="70" width="200" height="90" rx="40" fill="#1c2a6b" stroke="#3dffa2" stroke-width="3"/><path d="M95 100v30M80 115h30" stroke="#00e5ff" stroke-width="6" stroke-linecap="round"/><circle cx="200" cy="105" r="9" fill="#ff5ca8"/><circle cx="222" cy="125" r="9" fill="#b266ff"/><path d="M110 40q40-30 80 0" fill="none" stroke="#ff5ca8" stroke-width="4"/></svg>`
+};
+const tabs={
+ edu:["🎓 Educación","Aulas virtuales, bibliotecas digitales y plataformas de cursos",["Clases en línea y videollamadas","Libros y artículos al instante","Aprendizaje a tu propio ritmo"]],
+ sal:["🏥 Salud","Tecnología que cuida vidas",["Telemedicina y citas en línea","Historias clínicas digitales","Relojes y sensores que miden tu salud"]],
+ trab:["💼 Trabajo","Equipos que colaboran sin importar dónde estén",["Teletrabajo y trabajo híbrido","Nube: documentos compartidos","Automatización de tareas"]],
+ ocio:["🎮 Ocio","Entretenimiento sin fronteras",["Streaming de música y video","Videojuegos en línea","Redes sociales y creación de contenido"]]
+};
+const tbox=$("#tab-body"), tabsEl=$("#tabs");
+Object.keys(tabs).forEach(k=>{ const b=document.createElement("button"); b.textContent=tabs[k][0]; b.dataset.k=k; b.onclick=()=>tab(k); tabsEl.appendChild(b); });
+function tab(k){
+  [...tabsEl.children].forEach(b=>b.classList.toggle("on",b.dataset.k===k));
+  const [t,d,l]=tabs[k]; tbox.style.animation="none"; tbox.offsetHeight; tbox.style.animation="";
+  tbox.innerHTML=`<div>${art[k]}</div><div><h3>${t}</h3><p>${d}</p><ul>${l.map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
+}
+tab("edu");
+
+/* ===== Quiz ===== */
+const Q=[
+ {q:"¿Qué significan las siglas TIC?",o:["Tecnologías de la Información y la Comunicación","Técnicas de Internet y Computación","Telefonía Integrada Celular"],a:0},
+ {q:"¿Qué hace un servidor DNS?",o:["Guarda tus contraseñas","Traduce nombres de sitios web a direcciones IP","Enfría los computadores"],a:1},
+ {q:"¿Quién publicó la primera página web en 1991?",o:["Steve Jobs","Bill Gates","Tim Berners-Lee"],a:2},
+ {q:"¿Cuál es una buena práctica de seguridad digital?",o:["Usar la misma clave en todo","Activar la verificación en dos pasos","Compartir tu contraseña con amigos"],a:1}
+];
+let qi=0,score=0,done=false;
+function loadQ(){
+  const q=Q[qi]; done=false; $("#qnext").style.display="none"; $("#qbar").style.width=(qi/Q.length*100)+"%";
+  $("#qtxt").textContent=`${qi+1}. ${q.q}`; $("#qscore").textContent=`Puntaje: ${score}`;
+  const box=$("#qopts"); box.innerHTML="";
+  q.o.forEach((t,i)=>{ const b=document.createElement("button"); b.textContent=t; b.onclick=()=>{
+    if(done) return; done=true;
+    if(i===q.a){ b.classList.add("ok"); score++; toast("✅ ¡Correcto!"); } else { b.classList.add("bad"); box.children[q.a].classList.add("ok"); toast("❌ Casi…"); }
+    $("#qscore").textContent=`Puntaje: ${score}`; $("#qnext").style.display=""; $("#qnext").textContent=qi===Q.length-1?"Ver resultado":"Siguiente →";
+  }; box.appendChild(b); });
+}
+$("#qnext").onclick=()=>{
+  if(qi<Q.length-1){ qi++; loadQ(); }
+  else{
+    $("#qbar").style.width="100%";
+    const n=score===Q.length?"🏆 ¡Experto TIC!":score>=2?"👍 ¡Buen trabajo!":"📚 Sigue explorando";
+    $("#qtxt").textContent=`${n} Obtuviste ${score} de ${Q.length}`; $("#qopts").innerHTML="";
+    $("#qnext").textContent="Reintentar 🔁"; $("#qnext").onclick=()=>{ qi=0;score=0; $("#qnext").onclick=arguments.callee; location.hash="#quiz"; loadQ(); };
+  }
+};
+loadQ();
+
+/* ===== Checklist ===== */
+const hab=["Uso contraseñas distintas y largas","Activo la verificación en dos pasos","Reviso quién puede ver mis fotos y datos","Verifico las noticias antes de compartirlas","Respeto a los demás en línea","Actualizo mis aplicaciones y mi sistema"];
+const chk=$("#chk");
+hab.forEach(h=>{ const l=document.createElement("label"); l.innerHTML=`<input type="checkbox"> ${h}`; l.querySelector("input").onchange=e=>{ l.classList.toggle("on",e.target.checked); upd(); }; chk.appendChild(l); });
+function upd(){
+  const n=chk.querySelectorAll("input:checked").length, p=n/hab.length*100;
+  $("#cbar").style.width=p+"%";
+  $("#badge").textContent=n===hab.length?"🛡️ ¡Ciudadano digital nivel máximo!":n>=3?"🔐 Vas muy bien":"";
+}
+</script>
+</body>
+</html>
