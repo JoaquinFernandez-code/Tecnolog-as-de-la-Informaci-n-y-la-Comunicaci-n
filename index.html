@@ -1,9 +1,554 @@
-<html>
-  <head>
-    <title>TECNOLOGIAS DE LA INFORMACION Y LA COMUNICACION</title>
-  </head>
-  <body>
-    <h1>¿Que es TIC?</h1>
-    <p>TIC significa Tecnologías de la Información y la Comunicación. Se refiere al conjunto de herramientas, redes, dispositivos y programas que permiten crear, almacenar, procesar y transmitir información de forma digital.</p>
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Cap. 8: meta información para buscadores (también Cap. 19: SEO) -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Las Tecnologías de la Información y la Comunicación (TIC): qué son, cómo funcionan y cómo usarlas, explicado paso a paso." />
+<meta name="keywords" content="TIC, tecnologías de la información, comunicación, internet, redes" />
+<meta name="robots" content="index,follow" />
+<title>Tecnologías de la Información y la Comunicación (TIC)</title>
+
+<!-- Cap. 10: CSS interno con reglas (selector + declaración) -->
+<style type="text/css">
+  /* ===== Cap. 11: Color (nombre, hex, rgb, rgba, hsl) ===== */
+  body{
+    background-color:#f4f7fb;                 /* hex */
+    color:rgb(51,60,77);                      /* rgb */
+    font-family:Georgia,"Times New Roman",serif; /* Cap. 12: font-family con respaldo */
+    font-size:100%;
+    line-height:1.5em;                        /* Cap. 12: interlineado */
+    margin:0;
+  }
+  /* ===== Cap. 16: imagen de fondo en CSS ===== */
+  header{
+    background-color:navy;                    /* nombre de color */
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><circle cx='20' cy='20' r='2' fill='white' fill-opacity='0.35'/></svg>");
+    background-repeat:repeat;
+    color:white;
+    text-align:center;
+    padding:30px 20px 20px 20px;              /* Cap. 13: padding */
+  }
+  header h1{font-family:Arial,Verdana,sans-serif;font-size:250%;margin:0;text-shadow:2px 2px 4px #000}  /* Cap. 12 */
+  header p{margin:6px 0 0;color:hsl(190,100%,85%)}                                                      /* hsl */
+
+  /* Cap. 18: navegación concisa, clara y con contexto */
+  nav{background-color:hsla(0,0%,100%,0.95);border-bottom:2px solid #0088dd;position:sticky;top:0;z-index:10}  /* Cap. 15: z-index */
+  nav ul{margin:0;padding:8px 10px;text-align:center}
+  nav li{display:inline;margin:0 4px}                                    /* Cap. 13: display inline */
+  nav a{font-family:Arial,sans-serif;font-size:80%;text-decoration:none;color:#0066bb;padding:3px 6px}
+  nav a:hover{color:white;background-color:#0088dd;border-radius:4px}      /* Cap. 12: :hover */
+  nav a:visited{color:#0066bb}
+
+  /* ===== Cap. 15: Layout (ancho fijo/máximo, float en dos columnas) ===== */
+  .wrapper{max-width:1000px;min-width:320px;margin:20px auto;background:white;border:1px solid #cdd6e6;box-shadow:0 0 10px rgba(0,0,0,.1)}
+  .cols{overflow:auto;width:100%}              /* solución al contenedor de flotantes */
+  main{float:left;width:68%;padding:0 20px}
+  aside{float:right;width:25%;padding:10px;margin:20px 10px 20px 0;background-color:#eef5ff;border:1px solid #bcd;border-radius:8px;font-size:90%}
+  footer{clear:both;background-color:navy;color:white;text-align:center;padding:14px;font-size:85%}
+  @media(max-width:760px){main,aside{float:none;width:auto;margin:10px}}
+
+  h2{font-family:Arial,Verdana,sans-serif;color:#0066bb;border-bottom:2px solid #ee3e80;padding-bottom:4px;margin-top:40px}
+  h2 .cap{display:block;font-size:55%;letter-spacing:.2em;text-transform:uppercase;color:#ee3e80}   /* Cap. 12: text-transform, letter-spacing */
+  h3{font-family:Arial,sans-serif;font-weight:normal;color:#334}
+  p.intro:first-line{font-weight:bold}                                    /* Cap. 12: pseudo-elemento */
+  p.intro:first-letter{font-size:200%}
+  .importante{background-color:#fff6d6;border-left:4px solid orange;padding:6px 12px}   /* clase (Cap. 8) */
+  #nota-id{color:#a0205a;font-style:italic}                                /* id (Cap. 8) */
+  .tecnica{font-size:75%;font-family:"Courier New",monospace;color:#667;background:#f0f2f7;padding:2px 8px;border-radius:10px}
+
+  /* Cap. 13: bordes, margen, padding, sombras */
+  blockquote{margin:10px 20px;padding:10px 16px;border:1px solid #ccd;border-left:6px solid #0088dd;background:#f8fbff;font-style:italic}
+  address{background:#f0f2f7;padding:8px 14px;border-radius:6px;display:inline-block}
+
+  /* Cap. 14: listas, tablas y formularios */
+  ul.check{list-style-type:square}
+  ol.romano{list-style-type:lower-roman}
+  dt{font-weight:bold;color:#0066bb}
+  dd{margin-bottom:6px}
+  table{border-collapse:collapse;width:100%;margin:10px 0}
+  th,td{padding:7px 10px;border:1px solid #cdd6e6;text-align:left}
+  th{background-color:#0066bb;color:white;text-transform:uppercase;letter-spacing:.08em;font-size:85%}
+  tr.par td,tr.par th{background-color:#eef3fb}
+  tbody tr:hover td{background-color:#d6ecff}
+  td.num{text-align:right}
+  caption{font-size:85%;color:#667;padding:4px}
+  fieldset{border:1px solid #bcd;border-radius:10px;padding:14px;margin-bottom:12px}
+  legend{background:#eef5ff;border:1px solid #bcd;border-radius:10px;padding:4px 14px;font-family:Arial,sans-serif}
+  label.titulo,span.titulo{float:left;width:150px;clear:left}              /* alinear controles con float */
+  input[type="text"],input[type="email"],input[type="password"],input[type="date"],select,textarea{border:1px solid #aab;border-radius:5px;padding:4px;font-size:100%}
+  input[type="text"]:focus,input[type="email"]:focus,textarea:focus{background-color:#fffbe0;border-color:orange;outline:none}
+  input[type="submit"]{background:linear-gradient(#2aa0ff,#0066bb);color:white;border:0;padding:8px 20px;border-radius:6px;cursor:pointer;margin-top:8px}
+  input[type="submit"]:hover{background:linear-gradient(#0066bb,#2aa0ff)}
+  .fila{margin:8px 0;overflow:auto}
+
+  /* Cap. 16: tamaño y alineación de imágenes con CSS */
+  img.pequena{width:100px;height:100px}
+  img.mediana{width:160px;height:160px}
+  img.alinea-izq{float:left;margin:4px 14px 8px 0}
+  img.alinea-der{float:right;margin:4px 0 8px 14px}
+  img.centrada{display:block;margin:10px auto}
+  figure{margin:10px 0;text-align:center}
+  figcaption{font-size:85%;color:#667}
+  /* Cap. 16: rollover con una sola imagen (sprite) */
+  a.boton{display:inline-block;width:200px;height:40px;line-height:40px;text-align:center;color:white;font-family:Arial,sans-serif;text-decoration:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='80'><rect width='200' height='40' fill='rgb(0,102,187)'/><rect y='40' width='200' height='40' fill='rgb(238,62,128)'/></svg>");
+    background-position:0 0;border-radius:6px}
+  a.boton:hover{background-position:0 -40px}
+  video,audio,iframe{max-width:100%}
+  .video{text-align:center;margin:10px 0}
+  abbr{border-bottom:1px dotted #667;cursor:help}
+</style>
+</head>
+
+<body>
+<!-- ================= CABECERA (Cap. 17: HTML5) ================= -->
+<header id="inicio">
+  <h1>Tecnologías de la Información y la Comunicación</h1>
+  <p>Todo lo que necesitas saber sobre las TIC, capítulo a capítulo</p>
+</header>
+
+<!-- Cap. 4: enlaces internos / Cap. 18: navegación -->
+<nav>
+  <ul>
+    <li><a href="#cap1">1 Estructura</a></li>
+    <li><a href="#cap2">2 Texto</a></li>
+    <li><a href="#cap3">3 Listas</a></li>
+    <li><a href="#cap4">4 Enlaces</a></li>
+    <li><a href="#cap5">5 Imágenes</a></li>
+    <li><a href="#cap6">6 Tablas</a></li>
+    <li><a href="#cap7">7 Formularios</a></li>
+    <li><a href="#cap8">8 Extras</a></li>
+    <li><a href="#cap9">9 Video y audio</a></li>
+    <li><a href="#cap10">10 CSS</a></li>
+    <li><a href="#cap11">11 Color</a></li>
+    <li><a href="#cap12">12 Texto CSS</a></li>
+    <li><a href="#cap13">13 Cajas</a></li>
+    <li><a href="#cap14">14 Listas/tablas/forms</a></li>
+    <li><a href="#cap15">15 Layout</a></li>
+    <li><a href="#cap16">16 Imágenes CSS</a></li>
+    <li><a href="#cap17">17 HTML5</a></li>
+    <li><a href="#cap18">18 Diseño</a></li>
+    <li><a href="#cap19">19 Práctica</a></li>
+  </ul>
+</nav>
+
+<div class="wrapper">
+<div class="cols">
+
+<main>
+
+<!-- ============ CAPÍTULO 1: ESTRUCTURA ============ -->
+<section id="cap1">
+  <h2><span class="cap">Capítulo 1</span>Estructura: ¿qué son las TIC?</h2>
+  <p class="tecnica">Se usa: &lt;html&gt;, &lt;head&gt;, &lt;title&gt;, &lt;body&gt;, &lt;h1&gt;-&lt;h6&gt;, &lt;p&gt;, atributos</p>
+  <h3>Definición</h3>
+  <p class="intro" lang="es">Las TIC son el conjunto de tecnologías que permiten obtener, procesar, almacenar y compartir información y comunicarnos a distancia. Incluyen computadoras, teléfonos, redes, Internet, software y servicios digitales. Hoy están presentes en la educación, la salud, el trabajo y el ocio.</p>
+  <h3>Sus tres ideas clave</h3>
+  <h4>Información</h4>
+  <p>Datos organizados que tienen significado.</p>
+  <h4>Comunicación</h4>
+  <p>Intercambio de mensajes entre personas o máquinas.</p>
+  <h4>Tecnología</h4>
+  <p>Las herramientas (hardware y software) que lo hacen posible.</p>
+</section>
+
+<!-- ============ CAPÍTULO 2: TEXTO ============ -->
+<section id="cap2">
+  <h2><span class="cap">Capítulo 2</span>Texto: lenguaje de las TIC</h2>
+  <p class="tecnica">Se usa: b, i, strong, em, sup, sub, br, hr, blockquote, q, abbr, dfn, cite, address, s, ins, del</p>
+  <p>Una <dfn>red informática</dfn> es un conjunto de dispositivos conectados para compartir recursos. Es <strong>muy importante</strong> proteger tus datos, y <em>nunca</em> compartas tus contraseñas.</p>
+  <p>La <abbr title="Tecnologías de la Información y la Comunicación">TIC</abbr> más famosa es Internet, que se mide en megabits por segundo (Mbps). Un archivo de 1 GB equivale a 10<sup>9</sup> bytes, y el agua (H<sub>2</sub>O) enfría los centros de datos.</p>
+  <blockquote cite="https://es.wikipedia.org/wiki/Tim_Berners-Lee">
+    <p>La Web es más una creación social que técnica: la diseñé para un efecto social, ayudar a la gente a trabajar junta.</p>
+  </blockquote>
+  <p>Así lo expresó Tim Berners-Lee, creador de la Web (cita adaptada), en su libro <cite>Tejiendo la Red</cite>. Otra frase conocida: <q>El futuro ya llegó, solo que no está distribuido uniformemente</q>.</p>
+  <p>Precio del plan de datos: <s>S/ 59</s> <del>S/ 49</del> <ins>S/ 39</ins> al mes.</p>
+  <hr />
+  <p>Línea uno del dato<br />línea dos del dato<br />línea tres del dato</p>
+  <address>Autor de la página: Equipo TIC<br /><a href="mailto:tic@example.org">tic@example.org</a></address>
+</section>
+
+<!-- ============ CAPÍTULO 3: LISTAS ============ -->
+<section id="cap3">
+  <h2><span class="cap">Capítulo 3</span>Listas: componentes y pasos</h2>
+  <p class="tecnica">Se usa: ul, ol, li, dl, dt, dd, listas anidadas</p>
+  <h3>Lista no ordenada (hardware y software)</h3>
+  <ul class="check">
+    <li>Hardware
+      <ul>
+        <li>Computadora</li>
+        <li>Teléfono inteligente</li>
+        <li>Router</li>
+      </ul>
+    </li>
+    <li>Software
+      <ul>
+        <li>Sistema operativo</li>
+        <li>Navegador</li>
+        <li>Aplicaciones</li>
+      </ul>
+    </li>
+    <li>Redes</li>
+  </ul>
+  <h3>Lista ordenada: cómo se abre una página web</h3>
+  <ol class="romano">
+    <li>Escribes la dirección en el navegador.</li>
+    <li>El servidor DNS traduce el nombre a una dirección IP.</li>
+    <li>El navegador contacta al servidor web.</li>
+    <li>El servidor envía la página.</li>
+  </ol>
+  <h3>Lista de definiciones</h3>
+  <dl>
+    <dt>Bit</dt><dd>La unidad mínima de información digital: 0 o 1.</dd>
+    <dt>Nube</dt><dd>Servidores en Internet que almacenan y procesan datos para ti.</dd>
+    <dt>Wi-Fi</dt><dt>WLAN</dt><dd>Red inalámbrica local que usa ondas de radio.</dd>
+  </dl>
+</section>
+
+<!-- ============ CAPÍTULO 4: ENLACES ============ -->
+<section id="cap4">
+  <h2><span class="cap">Capítulo 4</span>Enlaces: conectando ideas</h2>
+  <p class="tecnica">Se usa: a href absoluto y relativo, mailto:, target, id y #</p>
+  <p>Visitar otros sitios (URL absolutas):</p>
+  <ul>
+    <li><a href="https://es.wikipedia.org/wiki/Tecnolog%C3%ADas_de_la_informaci%C3%B3n_y_la_comunicaci%C3%B3n" target="_blank">Las TIC en Wikipedia</a> (abre en nueva ventana)</li>
+    <li><a href="https://www.w3.org/" target="_blank">W3C: el consorcio de la Web</a></li>
+  </ul>
+  <p>Páginas de este sitio (URL relativas, si existieran): <a href="index.html">Inicio</a> · <a href="contacto.html">Contacto</a> · <a href="recursos/glosario.html">Glosario</a></p>
+  <p>Correo: <a href="mailto:tic@example.org">Escríbenos</a></p>
+  <p>Saltos dentro de la página: <a href="#cap19">ir al capítulo 19</a> · <a href="#inicio">Volver arriba ↑</a></p>
+</section>
+
+<!-- ============ CAPÍTULO 5: IMÁGENES ============ -->
+<section id="cap5">
+  <h2><span class="cap">Capítulo 5</span>Imágenes: lo que vemos de las TIC</h2>
+  <p class="tecnica">Se usa: img (src, alt, title), figure, figcaption; clases para tamaño y alineación (Cap. 16)</p>
+  <figure>
+    <img class="centrada" width="200" height="200"
+      src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><rect width='200' height='200' rx='20' fill='rgb(10,20,80)'/><circle cx='100' cy='100' r='60' fill='none' stroke='cyan' stroke-width='4'/><ellipse cx='100' cy='100' rx='25' ry='60' fill='none' stroke='cyan' stroke-width='3'/><path d='M40 100h120M50 70h100M50 130h100' stroke='cyan' stroke-width='3'/><circle cx='30' cy='30' r='6' fill='hotpink'/><circle cx='170' cy='45' r='6' fill='hotpink'/><circle cx='160' cy='170' r='6' fill='hotpink'/><path d='M30 30L100 100L170 45M100 100L160 170' stroke='hotpink' stroke-width='2'/></svg>"
+      alt="Esfera terrestre con una red de puntos conectados" title="Internet conecta todo el planeta" />
+    <figcaption>Internet conecta el planeta mediante una red de nodos.</figcaption>
+  </figure>
+  <p><img class="pequena alinea-izq" alt="Chip de computadora" title="Procesador"
+      src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='10' fill='rgb(230,235,250)'/><rect x='28' y='28' width='44' height='44' rx='4' fill='rgb(40,60,140)'/><g stroke='rgb(40,60,140)' stroke-width='4'><path d='M38 14v14M50 14v14M62 14v14M38 72v14M50 72v14M62 72v14M14 38h14M14 50h14M14 62h14M72 38h14M72 50h14M72 62h14'/></g><text x='50' y='56' font-size='14' text-anchor='middle' fill='white'>CPU</text></svg>" />
+    El <b>procesador</b> es el cerebro de cada dispositivo. Los formatos de imagen más usados en la web son JPEG (fotografías), GIF y PNG (gráficos, logos y transparencias). Las imágenes deben guardarse al tamaño final, a 72 ppi, para que la página cargue rápido.</p>
+  <p style="clear:both"><img class="pequena alinea-der" alt="Teléfono inteligente" title="Smartphone"
+      src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='10' fill='rgb(255,235,242)'/><rect x='32' y='10' width='36' height='80' rx='8' fill='rgb(40,40,60)'/><rect x='36' y='20' width='28' height='56' fill='rgb(120,200,255)'/><circle cx='50' cy='83' r='3' fill='white'/></svg>" />
+    El <b>teléfono inteligente</b> reúne en un solo aparato cámara, Internet, GPS y miles de aplicaciones. Siempre debes poner el atributo <code>alt</code> en cada imagen para que los lectores de pantalla puedan describirla.</p>
+  <div style="clear:both"></div>
+</section>
+
+<!-- ============ CAPÍTULO 6: TABLAS ============ -->
+<section id="cap6">
+  <h2><span class="cap">Capítulo 6</span>Tablas: datos de las TIC</h2>
+  <p class="tecnica">Se usa: table, thead, tbody, tfoot, tr, th (scope), td, colspan, rowspan, caption</p>
+  <table>
+    <caption>Velocidades de conexión típicas</caption>
+    <thead>
+      <tr><th scope="col">Tecnología</th><th scope="col">Medio</th><th scope="col">Velocidad aprox.</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">Módem telefónico</th><td>Línea telefónica</td><td class="num">56 kbps</td></tr>
+      <tr class="par"><th scope="row">ADSL</th><td>Cable de cobre</td><td class="num">Hasta 24 Mbps</td></tr>
+      <tr><th scope="row">Fibra óptica</th><td>Luz en vidrio</td><td class="num">1 Gbps o más</td></tr>
+      <tr class="par"><th scope="row">5G</th><td>Ondas de radio</td><td class="num">Cientos de Mbps</td></tr>
+    </tbody>
+    <tfoot>
+      <tr><td colspan="3">Los valores son referenciales y dependen del proveedor.</td></tr>
+    </tfoot>
+  </table>
+  <table>
+    <caption>Horario de un curso virtual (celdas combinadas)</caption>
+    <tr><th></th><th>9 am</th><th>10 am</th><th>11 am</th></tr>
+    <tr><th scope="row">Lunes</th><td colspan="2">Redes de computadoras</td><td>Laboratorio</td></tr>
+    <tr class="par"><th scope="row">Martes</th><td rowspan="2">Programación</td><td>Bases de datos</td><td>Tutoría</td></tr>
+    <tr><th scope="row">Miércoles</th><td>Seguridad</td><td>Proyecto</td></tr>
+  </table>
+</section>
+
+<!-- ============ CAPÍTULO 7: FORMULARIOS ============ -->
+<section id="cap7">
+  <h2><span class="cap">Capítulo 7</span>Formularios: participa</h2>
+  <p class="tecnica">Se usa: form, fieldset, legend, label, input (text, email, password, date, radio, checkbox, file, hidden, submit), select, textarea</p>
+  <form action="https://www.example.com/suscripcion.php" method="post">
+    <fieldset>
+      <legend>Tus datos</legend>
+      <div class="fila"><label class="titulo" for="nombre">Nombre:</label> <input type="text" id="nombre" name="nombre" maxlength="60" placeholder="Tu nombre" required="required" /></div>
+      <div class="fila"><label class="titulo" for="correo">Correo:</label> <input type="email" id="correo" name="correo" placeholder="tu@correo.com" /></div>
+      <div class="fila"><label class="titulo" for="clave">Contraseña:</label> <input type="password" id="clave" name="clave" /></div>
+      <div class="fila"><label class="titulo" for="fecha">Fecha de nacimiento:</label> <input type="date" id="fecha" name="fecha" /></div>
+    </fieldset>
+    <fieldset>
+      <legend>Tu relación con las TIC</legend>
+      <div class="fila"><span class="titulo">¿Usas Internet a diario?</span>
+        <label><input type="radio" name="uso" value="si" checked="checked" /> Sí</label>
+        <label><input type="radio" name="uso" value="no" /> No</label></div>
+      <div class="fila"><span class="titulo">Dispositivos:</span>
+        <label><input type="checkbox" name="disp" value="pc" /> Computadora</label>
+        <label><input type="checkbox" name="disp" value="cel" checked="checked" /> Celular</label>
+        <label><input type="checkbox" name="disp" value="tablet" /> Tablet</label></div>
+      <div class="fila"><label class="titulo" for="uso2">Uso principal:</label>
+        <select id="uso2" name="uso2">
+          <option value="estudio" selected="selected">Estudio</option>
+          <option value="trabajo">Trabajo</option>
+          <option value="ocio">Entretenimiento</option>
+        </select></div>
+      <div class="fila"><label class="titulo" for="comentarios">Comentarios:</label>
+        <textarea id="comentarios" name="comentarios" rows="3" cols="30">Cuéntanos cómo usas las TIC...</textarea></div>
+      <div class="fila"><label class="titulo" for="archivo">Adjuntar archivo:</label> <input type="file" id="archivo" name="archivo" /></div>
+      <input type="hidden" name="origen" value="pagina-tic" />
+    </fieldset>
+    <input type="submit" value="Enviar" />
+  </form>
+</section>
+
+<!-- ============ CAPÍTULO 8: MARCADO EXTRA ============ -->
+<section id="cap8">
+  <h2><span class="cap">Capítulo 8</span>Marcado extra: id, class, div y span</h2>
+  <p class="tecnica">Se usa: DOCTYPE, comentarios, id, class, div, span, entidades, iframe, meta</p>
+  <!-- Este comentario no se ve en el navegador (Cap. 8) -->
+  <div class="importante">
+    <p>Esta caja es un <code>&lt;div&gt;</code> con <code>class="importante"</code>. Dentro, un <span class="tecnica">span</span> marca una palabra en línea.</p>
+    <p id="nota-id">Este párrafo tiene un <code>id</code> único y su propio estilo.</p>
+  </div><!-- fin de .importante -->
+  <p>Símbolos con códigos de escape: &copy; 2026 · Marca&trade; · Precio: 20&euro; · 5 &times; 3 = 15 · 10 &divide; 2 = 5 · &lt;etiqueta&gt; · Tom &amp; Jerry</p>
+  <p>Un <code>&lt;iframe&gt;</code> abre una ventana a otra página (aquí, un mapa de OpenStreetMap):</p>
+  <iframe width="100%" height="260" frameborder="0" scrolling="no" title="Mapa de Lima"
+    src="https://www.openstreetmap.org/export/embed.html?bbox=-77.10%2C-12.15%2C-76.95%2C-12.02&amp;layer=mapnik"></iframe>
+</section>
+
+<!-- ============ CAPÍTULO 9: FLASH, VIDEO Y AUDIO ============ -->
+<section id="cap9">
+  <h2><span class="cap">Capítulo 9</span>Video y audio</h2>
+  <p class="tecnica">Se usa: video, audio, source, controls, poster, preload (Flash está obsoleto)</p>
+  <p>El libro explica que Flash perdió terreno frente a HTML5. Hoy se usan las etiquetas nativas:</p>
+  <div class="video">
+    <h3>Video con &lt;video&gt;</h3>
+    <video width="400" controls preload="metadata">
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+      <p>Tu navegador no admite video HTML5.</p>
+    </video>
+  </div>
+  <div class="video">
+    <h3>Audio con &lt;audio&gt;</h3>
+    <audio controls>
+      <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg" />
+      <p>Tu navegador no admite audio HTML5.</p>
+    </audio>
+  </div>
+  <div class="video">
+    <h3>Video alojado en YouTube (servicio externo)</h3>
+    <iframe width="400" height="225" src="https://www.youtube.com/embed/7_LPdttKXPc" title="Cómo funciona Internet" allowfullscreen></iframe>
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 10: INTRODUCCIÓN A CSS ============ -->
+<section id="cap10">
+  <h2><span class="cap">Capítulo 10</span>CSS: cómo se da estilo a esta página</h2>
+  <p class="tecnica">Se usa: style, selectores, cascada, herencia</p>
+  <p>Esta página usa CSS <b>interno</b> (en <code>&lt;style&gt;</code>); en un sitio real conviene una hoja externa con <code>&lt;link rel="stylesheet" href="css/estilos.css"&gt;</code>. Una regla se compone de <b>selector + declaración</b>:</p>
+  <pre style="background:#272c35;color:#eee;padding:10px;border-radius:6px;overflow-x:auto">h2 {
+  color: #0066bb;
+  border-bottom: 2px solid #ee3e80;
+}</pre>
+  <ul>
+    <li><b>Selectores usados:</b> tipo (<code>p</code>), clase (<code>.importante</code>), id (<code>#nota-id</code>), descendiente (<code>nav a</code>), pseudo-clase (<code>a:hover</code>) y atributo (<code>input[type="text"]</code>).</li>
+    <li><b>Cascada:</b> si dos reglas chocan, gana la más específica; si empatan, la última.</li>
+    <li><b>Herencia:</b> la fuente y el color del <code>body</code> pasan a los demás elementos.</li>
+  </ul>
+</section>
+
+<!-- ============ CAPÍTULO 11: COLOR ============ -->
+<section id="cap11">
+  <h2><span class="cap">Capítulo 11</span>Color: las TIC en una paleta</h2>
+  <p class="tecnica">Se usa: nombres, hex, rgb, rgba, hsl, hsla, opacity</p>
+  <table>
+    <tr><th>Forma</th><th>Ejemplo</th><th>Muestra</th></tr>
+    <tr><td>Nombre</td><td>DarkCyan</td><td style="background-color:DarkCyan;color:white">Texto</td></tr>
+    <tr class="par"><td>Hexadecimal</td><td>#ee3e80</td><td style="background-color:#ee3e80;color:white">Texto</td></tr>
+    <tr><td>RGB</td><td>rgb(0,102,187)</td><td style="background-color:rgb(0,102,187);color:white">Texto</td></tr>
+    <tr class="par"><td>RGBA</td><td>rgba(0,0,0,0.5)</td><td style="background-color:#fff;background-color:rgba(0,0,0,0.5);color:white">Texto</td></tr>
+    <tr><td>HSL</td><td>hsl(150,60%,40%)</td><td style="background-color:hsl(150,60%,40%);color:white">Texto</td></tr>
+    <tr class="par"><td>HSLA</td><td>hsla(280,70%,50%,0.6)</td><td style="background-color:hsla(280,70%,50%,0.6);color:white">Texto</td></tr>
+  </table>
+  <p>Recuerda cuidar el <b>contraste</b>: el texto debe leerse bien sobre su fondo (por eso aquí el texto claro va sobre colores oscuros).</p>
+</section>
+
+<!-- ============ CAPÍTULO 12: TEXTO CSS ============ -->
+<section id="cap12">
+  <h2><span class="cap">Capítulo 12</span>Texto con estilo</h2>
+  <p class="tecnica">Se usa: font-family, size, weight, style, text-transform, decoration, letter/word-spacing, line-height, text-align, text-indent, text-shadow, :first-letter</p>
+  <p style="font-family:Arial,sans-serif">Sans-serif (Arial): limpio en pantalla.</p>
+  <p style="font-family:Georgia,serif">Serif (Georgia): tradicional para textos largos.</p>
+  <p style="font-family:'Courier New',monospace">Monospace (Courier): ideal para código.</p>
+  <p style="font-size:150%;font-weight:bold">Tamaño y peso: 150% y negrita.</p>
+  <p style="font-style:italic;text-transform:uppercase;letter-spacing:.2em">Cursiva, mayúsculas y espaciado</p>
+  <p style="text-decoration:underline">Subrayado</p> <p style="text-decoration:line-through">Tachado</p>
+  <p style="text-indent:30px;text-align:justify;line-height:1.6em">Texto justificado con sangría y mayor interlineado. Un buen interlineado, de 1.4 a 1.5 em, hace que los párrafos largos sean más fáciles de leer en pantalla.</p>
+  <p style="text-align:right">Alineado a la derecha</p>
+  <p style="text-align:center;font-size:200%;color:#0066bb;text-shadow:2px 2px 4px #999">Texto con sombra</p>
+</section>
+
+<!-- ============ CAPÍTULO 13: CAJAS ============ -->
+<section id="cap13">
+  <h2><span class="cap">Capítulo 13</span>Cajas: el modelo de caja</h2>
+  <p class="tecnica">Se usa: width, height, padding, border, margin, overflow, display, visibility, border-radius, box-shadow</p>
+  <p>Cada elemento es una caja: <b>contenido → padding → borde → margen</b>.</p>
+  <div style="width:250px;padding:15px;border:4px dashed #0088dd;margin:15px auto;background:#eef5ff;border-radius:14px;box-shadow:5px 5px 8px #aab;text-align:center">
+    Caja centrada con padding, borde discontinuo, esquinas redondeadas y sombra.
+  </div>
+  <div style="width:250px;height:50px;overflow:auto;border:2px solid #667;padding:6px;margin-bottom:12px">
+    Esta caja tiene altura fija y overflow: auto, por lo que aparece una barra de desplazamiento cuando el contenido no cabe en el espacio disponible.
+  </div>
+  <p>Con <code>display: inline</code> una lista se vuelve un menú horizontal (como el de arriba), y con <code>display: none</code> se oculta un elemento.</p>
+</section>
+
+<!-- ============ CAPÍTULO 14: LISTAS, TABLAS Y FORMULARIOS (CSS) ============ -->
+<section id="cap14">
+  <h2><span class="cap">Capítulo 14</span>Listas, tablas y formularios con estilo</h2>
+  <p class="tecnica">Se usa: list-style-type, list-style-image, border-collapse, filas alternas, :hover, :focus, cursor</p>
+  <ul style="list-style-type:circle"><li>Viñetas circulares</li><li>con list-style-type</li></ul>
+  <ol style="list-style-type:upper-alpha"><li>Lista con letras</li><li>en mayúscula</li></ol>
+  <ul style="list-style-image:url('data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%2714%27 height=%2714%27><circle cx=%277%27 cy=%277%27 r=%275%27 fill=%27rgb(238,62,128)%27/></svg>')"><li>Viñeta hecha con una imagen</li><li>(list-style-image)</li></ul>
+  <p>Las tablas de este sitio usan bordes colapsados, relleno en las celdas, filas alternas y un color al pasar el ratón. Los campos del formulario del capítulo 7 cambian de color al recibir el foco (<code>:focus</code>) y el botón al pasar el cursor. Los controles se alinean con <code>float</code> y un ancho fijo en las etiquetas.</p>
+  <p><a href="#cap7" style="cursor:pointer">Este enlace usa cursor: pointer</a> y <span style="cursor:help">este texto usa cursor: help</span>.</p>
+</section>
+
+<!-- ============ CAPÍTULO 15: LAYOUT ============ -->
+<section id="cap15">
+  <h2><span class="cap">Capítulo 15</span>Layout: cómo se organiza la página</h2>
+  <p class="tecnica">Se usa: position, float, clear, overflow, min/max-width, z-index</p>
+  <ul>
+    <li><b>Dos columnas con float:</b> el contenido principal flota a la izquierda (68%) y la barra lateral a la derecha (25%).</li>
+    <li><b>Contenedor de flotantes:</b> <code>.cols</code> usa <code>overflow: auto</code> para no colapsar.</li>
+    <li><b>Ancho máximo:</b> <code>.wrapper</code> usa <code>max-width: 1000px</code> y se centra con márgenes automáticos.</li>
+    <li><b>Posición pegajosa:</b> el menú se queda arriba, con <code>z-index</code> para quedar sobre el contenido.</li>
+    <li><b>Adaptable:</b> una regla <code>@media</code> pasa a una sola columna en pantallas pequeñas.</li>
+  </ul>
+  <div style="position:relative;height:90px;border:1px solid #aab;background:#f8f8fc">
+    <span style="position:absolute;top:10px;left:10px;background:#ffd0e0;padding:4px 8px">absolute (arriba-izquierda)</span>
+    <span style="position:relative;top:45px;left:120px;background:#d0e8ff;padding:4px 8px">relative (desplazado)</span>
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 16: IMÁGENES CON CSS ============ -->
+<section id="cap16">
+  <h2><span class="cap">Capítulo 16</span>Imágenes y fondos con CSS</h2>
+  <p class="tecnica">Se usa: width/height, float, background-image, repeat, position, rollover con sprite</p>
+  <p>Tamaños con clases (<code>pequena</code>, <code>mediana</code>), alineación con <code>float</code> y fondo repetido en la cabecera (puntos blancos). Pasa el ratón por este botón: usa una sola imagen con dos estados.</p>
+  <p><a class="boton" href="#cap19">Ir a la práctica →</a></p>
+</section>
+
+<!-- ============ CAPÍTULO 17: HTML5 ============ -->
+<section id="cap17">
+  <h2><span class="cap">Capítulo 17</span>HTML5: estructura semántica</h2>
+  <p class="tecnica">Se usa: header, nav, main, section, article, aside, footer, figure, figcaption, hgroup</p>
+  <p>Esta página se construye con elementos semánticos: <code>&lt;header&gt;</code> (título), <code>&lt;nav&gt;</code> (menú), <code>&lt;main&gt;</code> (contenido), <code>&lt;section&gt;</code> (cada capítulo), <code>&lt;aside&gt;</code> (barra lateral) y <code>&lt;footer&gt;</code> (pie).</p>
+  <article>
+    <hgroup>
+      <h3>Artículo: las TIC en la vida diaria</h3>
+      <h4>Cuatro ámbitos clave</h4>
+    </hgroup>
+    <ul>
+      <li><b>Educación:</b> clases virtuales y bibliotecas digitales.</li>
+      <li><b>Salud:</b> telemedicina e historias clínicas electrónicas.</li>
+      <li><b>Trabajo:</b> teletrabajo, nube y automatización.</li>
+      <li><b>Ocio:</b> música, video y videojuegos en línea.</li>
+    </ul>
+  </article>
+</section>
+
+<!-- ============ CAPÍTULO 18: PROCESO Y DISEÑO ============ -->
+<section id="cap18">
+  <h2><span class="cap">Capítulo 18</span>Proceso y diseño de este sitio</h2>
+  <p class="tecnica">Se usa: audiencia, objetivos, mapa del sitio, jerarquía visual, navegación</p>
+  <h3>1. ¿Para quién es?</h3>
+  <table>
+    <thead><tr><th>Visitante</th><th>Edad</th><th>Qué busca</th></tr></thead>
+    <tbody>
+      <tr><td>Ana, estudiante</td><td class="num">19</td><td>Entender qué son las TIC para un trabajo</td></tr>
+      <tr class="par"><td>Luis, docente</td><td class="num">45</td><td>Ejemplos para sus clases</td></tr>
+      <tr><td>Rosa, emprendedora</td><td class="num">35</td><td>Herramientas para su negocio</td></tr>
+    </tbody>
+  </table>
+  <h3>2. Mapa del sitio</h3>
+  <ul>
+    <li>Inicio
+      <ul>
+        <li>Qué son las TIC</li>
+        <li>Componentes (hardware, software, redes)</li>
+        <li>Datos y velocidades</li>
+        <li>Multimedia</li>
+        <li>Participa (formulario)</li>
+      </ul>
+    </li>
+  </ul>
+  <h3>3. Principios aplicados</h3>
+  <ul>
+    <li><b>Jerarquía visual:</b> títulos grandes en azul, etiquetas de capítulo en rosa.</li>
+    <li><b>Agrupar:</b> cada capítulo es un bloque con borde y espacio en blanco.</li>
+    <li><b>Similitud:</b> todos los enlaces y encabezados mantienen el mismo estilo.</li>
+    <li><b>Navegación:</b> concisa, clara y siempre visible arriba.</li>
+  </ul>
+</section>
+
+<!-- ============ CAPÍTULO 19: INFORMACIÓN PRÁCTICA ============ -->
+<section id="cap19">
+  <h2><span class="cap">Capítulo 19</span>Práctica: SEO, analítica y publicación</h2>
+  <p class="tecnica">Se usa: SEO, Google Analytics, dominio, hosting, FTP</p>
+  <dl>
+    <dt>SEO</dt>
+    <dd>Palabras clave en siete lugares: título, URL, encabezados, texto, enlaces, <code>alt</code> de imágenes y meta descripción (todos presentes en esta página).</dd>
+    <dt>Analítica</dt>
+    <dd>Se pega el código de seguimiento de Google Analytics antes de <code>&lt;/head&gt;</code> para ver visitas, páginas más vistas y tasa de rebote.</dd>
+    <dt>Dominio y hosting</dt>
+    <dd>El dominio es la dirección web; el hosting es el servidor donde vive el sitio.</dd>
+    <dt>FTP</dt>
+    <dd>Programa (como FileZilla) para subir los archivos al servidor.</dd>
+  </dl>
+  <!-- Aquí iría el código de seguimiento de analítica -->
+  <p class="importante"><strong>Conclusión:</strong> las TIC no son solo aparatos: son la forma en que hoy aprendemos, trabajamos y nos comunicamos. Usarlas con responsabilidad es una competencia básica del siglo XXI.</p>
+</section>
+
+</main>
+
+<!-- Cap. 17: aside como barra lateral -->
+<aside>
+  <section>
+    <h3>Datos rápidos</h3>
+    <ul>
+      <li>Internet nació en 1969 (ARPANET).</li>
+      <li>La Web se creó en 1991.</li>
+      <li>El primer iPhone salió en 2007.</li>
+    </ul>
+  </section>
+  <section>
+    <h3>Glosario</h3>
+    <dl>
+      <dt>IP</dt><dd>Dirección de un equipo en la red.</dd>
+      <dt>DNS</dt><dd>Traduce nombres a IP.</dd>
+      <dt>HTML</dt><dd>Lenguaje de las páginas web.</dd>
+    </dl>
+  </section>
+  <section>
+    <h3>Capítulos</h3>
+    <ol>
+      <li><a href="#cap1">Estructura</a></li>
+      <li><a href="#cap5">Imágenes</a></li>
+      <li><a href="#cap10">CSS</a></li>
+      <li><a href="#cap15">Layout</a></li>
+    </ol>
+  </section>
+</aside>
+
+</div><!-- fin .cols -->
+
+<footer>
+  <p>&copy; 2026 · Página sobre las TIC · Basada en la estructura de «HTML &amp; CSS» de Jon Duckett</p>
+  <p><a href="#inicio" style="color:#9fe">Volver arriba ↑</a></p>
+</footer>
+</div><!-- fin .wrapper -->
+
+</body>
 </html>
